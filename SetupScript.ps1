@@ -186,7 +186,7 @@ function uninstallPrograms{
      		"OneNoteFreeRetail - de-de",
      		"OneNoteFreeRetail - fr-fr",
        		"OneNoteFreeRetail - es-es",
-	 	"OneNoteFreeRetail - nl-nl",
+	 	"OneNoteFreeRetail - it-it",
 		"OneNoteFreeRetail - nl-nl",
 		"O365HomePremRetail - en-gb",
   		"O365HomePremRetail - en-us",
