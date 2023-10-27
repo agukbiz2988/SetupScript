@@ -147,6 +147,7 @@ function installPrograms{
 function uninstallPrograms{
 
 	$apps =@(
+ 		"McAfee"
 		"McAfee® Personal Security",
   		"McAfee LiveSafe",
   		"WebAdvisor by McAfee",
