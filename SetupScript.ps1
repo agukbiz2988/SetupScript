@@ -171,7 +171,7 @@ function uninstallPrograms{
 	
 	foreach($program in $apps){
  		Write-Host "Uninstalling $program"
-		winget uninstall --name $program --accept-source-agreements --accept-package-agreements --silent
+		winget uninstall --name $program --accept-source-agreements --silent
 	}
     
     #List of Programs to uninstall if they're on the system
