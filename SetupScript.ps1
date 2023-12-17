@@ -45,7 +45,37 @@ function installAppInstaller{
 
 }#End of installAppInstaller
 
-Function installOffice{
+function installOffice{
+        #Install Office 365
+        while ($installProgramLoop) {
+            $officeChoice = Read-Host "
+            Please select which office application you would like to install
+            Please choose ONE of the following Options Below:
+    
+            [0] Office 32 bit
+            [1] Office 64 bit
+            [2] Libre Office
+            [3] No Office
+            "
+    
+            switch ($officeChoice) {
+                0 { $installProgramLoop = $false
+                    installOffice}
+                1 { $installProgramLoop = $false
+                    winget install "9WZDNCRD29V9" --accept-source-agreements -h --force}
+                2 { $installProgramLoop = $false
+                    winget install "TheDocumentFoundation.LibreOffice" --accept-source-agreements -h --force }
+                3 { $installProgramLoop = $false
+                Write-Host "No office aplication will be installed" }
+                Default {
+                    Write-Host "Sorry i didnt understand that"
+                }
+            }
+        
+        }#End of While Loop
+}
+
+Function installOffice32{
 
     #folder Paths 
     $a = Test-Path -Path "C:\PS"
@@ -71,6 +101,34 @@ Function installOffice{
     Start-Process -FilePath "C:\PS\Office32bit.exe" -Wait
 
 }#Install Office 32 Bit Ends
+
+
+Function installOffice64{
+
+    #folder Paths 
+    $a = Test-Path -Path "C:\PS"
+    $b = Test-Path -Path "C:\PS\Office64bit.exe"
+
+    #Statement to check Paths and create a folder if it doesn't exist
+    if(!$a){
+        new-Item -Path "C:\" -Name "PS" -ItemType "directory"
+        Write-Output "Path Created"
+    }else{
+        Write-Output "Path directory already exists"
+    }
+
+    #Download App installer
+    if(!$b){
+	Write-Output "Downloading Office 365 64-bit"
+    (New-Object System.Net.WebClient).DownloadFile("https://github.com/agukbiz2988/SetupScript/raw/main/OfficeSetup64bit.exe", "C:\PS\Office64bit.exe")
+    }else{
+        Write-Output "File Already Exists"
+    }
+
+    #Install office
+    Start-Process -FilePath "C:\PS\Office64bit.exe" -Wait
+
+}#Install Office 64 Bit Ends
 
 Function downloadSOS{
 
@@ -114,33 +172,7 @@ function installPrograms{
              winget install $list[$i] --accept-source-agreements -h
             } 
     
-    #Install Office 365
-    while ($installProgramLoop) {
-        $officeChoice = Read-Host "
-        Please select which office application you would like to install
-        Please choose ONE of the following Options Below:
-
-        [0] Office 32 bit
-        [1] Office 64 bit
-        [2] Libre Office
-        [3] No Office
-        "
-
-        switch ($officeChoice) {
-            0 { $installProgramLoop = $false
-                installOffice}
-            1 { $installProgramLoop = $false
-                winget install "9WZDNCRD29V9" --accept-source-agreements -h --force}
-            2 { $installProgramLoop = $false
-                winget install "TheDocumentFoundation.LibreOffice" --accept-source-agreements -h --force }
-            3 { $installProgramLoop = $false
-	    	Write-Host "No office aplication will be installed" }
-            Default {
-                Write-Host "Sorry i didnt understand that"
-            }
-        }
-    
-    }#End of While Loop
+    installOffice
 
 }#End of Install Programs
 
