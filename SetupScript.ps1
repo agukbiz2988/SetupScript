@@ -46,6 +46,10 @@ function installAppInstaller{
 }#End of installAppInstaller
 
 function installOffice{
+
+        #installation of programs will begin depending previous choices
+        $installProgramLoop = $true
+
         #Install Office 365
         while ($installProgramLoop) {
             $officeChoice = Read-Host "
@@ -60,9 +64,9 @@ function installOffice{
     
             switch ($officeChoice) {
                 0 { $installProgramLoop = $false
-                    installOffice}
+                    installOffice32}
                 1 { $installProgramLoop = $false
-                    winget install "9WZDNCRD29V9" --accept-source-agreements -h --force}
+                    installOffice64}
                 2 { $installProgramLoop = $false
                     winget install "TheDocumentFoundation.LibreOffice" --accept-source-agreements -h --force }
                 3 { $installProgramLoop = $false
@@ -160,9 +164,6 @@ Function downloadSOS{
 
 function installPrograms{
             
-    #installation of programs will begin depending previous choices
-    $installProgramLoop = $true
-
     write-output "`nInstallation of selected Programs will begin`n"
    
     #List of Programs
@@ -170,8 +171,9 @@ function installPrograms{
             
     for($i = 0; $i -le $list.length -1 ; $i++){
              winget install $list[$i] --accept-source-agreements -h
-            } 
-    
+        } 
+
+        
     installOffice
 
 }#End of Install Programs
@@ -185,20 +187,20 @@ function uninstallPrograms{
   		"WebAdvisor by McAfee",
 		"Amazon Alexa",
   		"Disney+",
-    		"Spotify Music",
-    		"Xbox TCUI",
-      		"Xbox Console Companion",
+    	"Spotify Music",
+    	"Xbox TCUI",
+      	"Xbox Console Companion",
 		"Xbox Game Bar Plugin",
   		"Xbox Game Bar",
   		"Xbox Identity Provider",
-    		"Xbox Game Speech Window",
-      		"Xbox",
-      		"Microsoft Solitaire Collection",
-      		"OneNote",
+    	"Xbox Game Speech Window",
+      	"Xbox",
+      	"Microsoft Solitaire Collection",
+      	"OneNote",
 		"Netflix",
   		"Prime Video for Windows",
-    		"Dropbox promotion",
-    		"ExpressVPN"
+    	"Dropbox promotion",
+    	"ExpressVPN"
 	);    
 	
 	foreach($program in $apps){
@@ -209,39 +211,39 @@ function uninstallPrograms{
     #List of Programs to uninstall if they're on the system
     $pro = @(	"9N7WSZGCK7M5",
 		"Amazon.com.Amazon_343d40qqvtj1t",
-    		"{4493F3B0-51DA-11EC-8AA4-3863BB3CB5A8}",
-    		"9WZDNCRD29V9",
-      		"Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe",
-     		"OneNoteFreeRetail - en-gb",
-     		"OneNoteFreeRetail - en-us",
-       		"OneNoteFreeRetail - cs-cz",
+    	"{4493F3B0-51DA-11EC-8AA4-3863BB3CB5A8}",
+    	"9WZDNCRD29V9",
+      	"Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe",
+     	"OneNoteFreeRetail - en-gb",
+     	"OneNoteFreeRetail - en-us",
+       	"OneNoteFreeRetail - cs-cz",
 	 	"OneNoteFreeRetail - da-dk",
-     		"OneNoteFreeRetail - de-de",
-     		"OneNoteFreeRetail - fr-fr",
-       		"OneNoteFreeRetail - es-es",
+     	"OneNoteFreeRetail - de-de",
+     	"OneNoteFreeRetail - fr-fr",
+       	"OneNoteFreeRetail - es-es",
 	 	"OneNoteFreeRetail - it-it",
 		"OneNoteFreeRetail - nl-nl",
 		"O365HomePremRetail - en-gb",
   		"O365HomePremRetail - en-us",
-    		"O365HomePremRetail - cs-cz",
-      		"O365HomePremRetail - da-dk",
+    	"O365HomePremRetail - cs-cz",
+      	"O365HomePremRetail - da-dk",
 		"O365HomePremRetail - nl-nl",
   		"O365HomePremRetail - fr-fr",
-    		"O365HomePremRetail - de-de",
-      		"O365HomePremRetail - it-it",
+    	"O365HomePremRetail - de-de",
+      	"O365HomePremRetail - it-it",
 		"O365HomePremRetail - es-es",
   		"O365HomePremRetail - nl-nl",
   		"Dell Pair",
-    		"DellInc.DellCustomerConnect_htrsf667h5kn2",
-      		"Dell Inc.DellDigitalDelivery_htrsf667h5kn2",
+    	"DellInc.DellCustomerConnect_htrsf667h5kn2",
+      	"Dell Inc.DellDigitalDelivery_htrsf667h5kn2",
 		"DellInc.DellUpdate_htrsf667h5kn2",
   		"DellInc.MyDell_htrsf667h5kn2",
-    		"AD2F1837.HPEasyClean_v10z8vjag6ke6",
-      		"AD2F1837.HPPCHardwareDiagnosticsWindows_v10z8vjag6ke6",
+    	"AD2F1837.HPEasyClean_v10z8vjag6ke6",
+      	"AD2F1837.HPPCHardwareDiagnosticsWindows_v10z8vjag6ke6",
 		"AD2F1837.HPPrivacySettings_v10z8vjag6ke6",
   		"AD2F1837.HPQuickDrop_v10z8vjag6ke6",
-    		"AD2F1837.HPSystemInformation_v10z8vjag6ke6",
-      		"AD2F1837.myHP_v10z8vjag6ke6"
+    	"AD2F1837.HPSystemInformation_v10z8vjag6ke6",
+      	"AD2F1837.myHP_v10z8vjag6ke6"
 	  );
     
     #Foreach loop to uninstall list of programs
