@@ -20,7 +20,7 @@
 
   <!--  <Updates Enabled="TRUE" Channel="Current" /> -->
 
-   <Display Level="None" AcceptEULA="TRUE" />
+   <Display AcceptEULA="TRUE" />
 
   <!--  <Property Name="AUTOACTIVATE" Value="1" />  -->
 
