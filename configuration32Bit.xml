@@ -12,7 +12,7 @@
     <RemoveMSI />
     <Remove All="TRUE"/>
 
-    <Add OfficeClientEdition="32" Channel="Current">
+    <Add OfficeClientEdition="32">
         <Product ID="O365BusinessRetail">
         <Language ID="en-gb" />
         </Product>
