@@ -253,7 +253,6 @@ function uninstallPrograms{
     	"Xbox Game Speech Window",
       	"Xbox",
       	"Microsoft Solitaire Collection",
-      	"OneNote",
 		"Netflix",
   		"Prime Video for Windows",
     	"Dropbox promotion",
