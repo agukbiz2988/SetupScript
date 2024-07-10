@@ -265,7 +265,8 @@ function uninstallPrograms{
 	}
     
     #List of Programs to uninstall if they're on the system
-    $pro = @(	"9N7WSZGCK7M5",
+    $pro = @(	"ARP\Machine\X64\McAfee.WPS",
+    		"9N7WSZGCK7M5",
 		"Amazon.com.Amazon_343d40qqvtj1t",
     	"{4493F3B0-51DA-11EC-8AA4-3863BB3CB5A8}",
   		"Dell Pair",
