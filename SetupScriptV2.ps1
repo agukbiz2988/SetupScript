@@ -26,7 +26,11 @@ function testAppInstaller{
 }#Test App Installer Ends
 
 function installAppInstaller{
+	write-host "Downloading and installing Winget/App Installer"
+ 
 	Add-AppxPackage https://tinyurl.com/w1nget
+
+  	Winget -v
 }#End of installAppInstaller
 
 function installOffice{
