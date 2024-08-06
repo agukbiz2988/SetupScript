@@ -26,23 +26,7 @@ function testAppInstaller{
 }#Test App Installer Ends
 
 function installAppInstaller{
-    $loop = $true
-
-    Start-Process "https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-gb&gl=gb&rtc=1"
-
-    while ($loop) {
-        $continue = Read-Host "
-        If you have installed the app installer and are ready to use this script please type Y to continue
-        [C] Continue"
-
-        switch($continue){
-            C {
-                $loop = $false
-                testAppInstaller
-            }
-        }
-    }
-
+	Add-AppxPackage https://tinyurl.com/w1nget
 }#End of installAppInstaller
 
 function installOffice{
@@ -425,8 +409,9 @@ function scriptMenu{
 	        6 { downloadSOS 	    }
             7 {removeAllOffice      }
             * {
-   		        downloadSOS
-                testAppInstaller
+   		downloadSOS
+                installAppInstaller
+		winget list Microsoft.AppInstaller
                 setPower
                 uninstallPrograms
                 installPrograms
