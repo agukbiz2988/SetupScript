@@ -213,7 +213,7 @@ function installPrograms{
     write-output "`nInstallation of selected Programs will begin`n"
 
     #List of Programs
-    $list = @( "google.chrome", "Adobe.Acrobat.Reader.32-bit", "7zip.7zip")
+    $list = @( "google.chrome", "Adobe.Acrobat.Reader.32-bit")
             
     for($i = 0; $i -le $list.length -1 ; $i++){
              winget install $list[$i] --accept-source-agreements -h
