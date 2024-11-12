@@ -320,6 +320,7 @@ function otherPrograms{
         [6] 7zip
         [7] Dropbox
 	[8] Splashtop SOS
+ 	[9] Splashtop Streamer
         [E] Exit Other Programs  
         "
         
@@ -327,12 +328,13 @@ function otherPrograms{
             0 { installOffice   									    }
             1 { winget install VideoLAN.VLC --accept-source-agreements -h --force                           }
             2 { winget install TheDocumentFoundation.LibreOffice  --accept-source-agreements -h --force     }
-            3 { winget install Adobe.Acrobat.Reader.32-bit --accept-source-agreements -h --force            }
+            3 { winget install Adobe.Acrobat.Reader.64-bit --accept-source-agreements -h --force            }
             4 { winget install google.chrome --accept-source-agreements -h --force                          }
             5 { winget install Mozilla.Firefox --accept-source-agreements -h --force                        }
             6 { winget install 7zip.7zip --accept-source-agreements -h --force                              }
             7 { winget install Dropbox.Dropbox --accept-source-agreements -h --force                        }
 	    8 { downloadSOS										    }
+     	    9 { winget install Splashtop.SplashtopStreamer -h --force                                       }
             E { 
                 #Stop the While Loop
                 $otherProgramsLoop = $false
