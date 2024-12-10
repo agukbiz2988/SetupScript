@@ -287,7 +287,7 @@ function wolfUninstall{
 
 	foreach($program in $hpWolf){
  		Write-Host "Uninstalling $program"
-	        winget uninstall --name $program --accept-source-agreements --silent
+	        winget uninstall --name $program --silent
 	}
 }#end of uninstall wolf security
 
