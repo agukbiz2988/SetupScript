@@ -299,7 +299,12 @@ function setPower{
     Powercfg /Change standby-timeout-ac 0 #sleep never
     Powercfg /Change standby-timeout-dc 0 #sleep never
     powercfg /hibernate off
-    
+
+    #Enable Password Prompt After Wake-Up:
+    powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
+    powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
+    powercfg -SetActive SCHEME_CURRENT
+
     #Sets Time Zone
     Set-TimeZone -Id 'GMT Standard Time'
 
