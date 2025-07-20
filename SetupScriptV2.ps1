@@ -28,6 +28,8 @@ function testAppInstaller{
 function installAppInstaller{
 	write-host "Downloading and installing Winget/App Installer"
  
+ 	Winget Upgrade Microsoft.AppInstaller
+  
 	Add-AppxPackage https://tinyurl.com/w1nget
 
   	Winget -v
