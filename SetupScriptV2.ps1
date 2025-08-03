@@ -26,13 +26,33 @@ function testAppInstaller{
 }#Test App Installer Ends
 
 function installAppInstaller{
+    $installProgramLoop = $true
 	write-host "Downloading and installing Winget/App Installer"
- 
- 	Winget Upgrade Microsoft.AppInstaller
-  
-	Add-AppxPackage https://tinyurl.com/w1nget
 
-  	Winget -v
+    try {
+        #Install/update winget using built in methods
+        #Winget Upgrade Microsoft.AppInstaller
+        throw "Test Error"
+        Winget -v
+        exit
+    }
+    catch {
+        Write-Warning "Error installing/updating winget using built in methods"
+        
+        while ($installProgramLoop) {
+        $choice = Read-Host "Would you like to try downloading Winget Manually?  Please Answer Y/N: "
+
+            switch ($choice) {
+                Y { $installProgramLoop = $false
+                    Add-AppxPackage https://tinyurl.com/w1nget}
+                N { $installProgramLoop = $false }
+                Default {
+                    Write-Host "Sorry i didnt understand that please answer Y or N"
+                }
+            }
+        
+        }#End of While Loop
+    }    
 }#End of installAppInstaller
 
 function installOffice{
