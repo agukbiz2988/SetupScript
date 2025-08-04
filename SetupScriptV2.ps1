@@ -26,32 +26,22 @@ function testAppInstaller{
 }#Test App Installer Ends
 
 function installAppInstaller{
-    $installProgramLoop = $true
+
 	write-host "Downloading and installing Winget/App Installer"
 
     try {
         #Install/update winget using built in methods
         Winget Upgrade Microsoft.AppInstaller
         Winget -v
-        exit
     }
     catch {
         Write-Warning "Error installing/updating winget using built in methods"
-        
-        while ($installProgramLoop) {
-        $choice = Read-Host "Would you like to try downloading Winget Manually?  Please Answer Y/N: "
 
-            switch ($choice) {
-                Y { $installProgramLoop = $false
-                    Add-AppxPackage https://tinyurl.com/w1nget}
-                N { $installProgramLoop = $false }
-                Default {
-                    Write-Host "Sorry i didnt understand that please answer Y or N"
-                }
-            }
+        Write-Host "Attempting top download Winget Manually"
         
-        }#End of While Loop
-    }    
+        Add-AppxPackage https://tinyurl.com/w1nget
+             
+    }
 }#End of installAppInstaller
 
 function installOffice{
@@ -371,6 +361,7 @@ function otherPrograms{
 
 function welcomelogo {
     Write-Host @"
+
     ==============================================================================================
 
     .d88888b             dP                        .d88888b                    oo            dP
@@ -385,6 +376,7 @@ function welcomelogo {
      				    ** Made by Andy Gratton **
 
     ==============================================================================================
+
 "@
 }#End welcomeLogo
 
@@ -440,9 +432,9 @@ function scriptMenu{
 	        6 { downloadSOS 	    }
             7 {removeAllOffice      }
             * {
-   		downloadSOS
+   		        downloadSOS
                 installAppInstaller
-		winget list Microsoft.AppInstaller
+		        winget list Microsoft.AppInstaller
                 setPower
                 uninstallPrograms
                 installPrograms
