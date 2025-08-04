@@ -1,4 +1,3 @@
- 
 function testAppInstaller{
     try{
         Write-Host "`nWinget/ App Installer"
