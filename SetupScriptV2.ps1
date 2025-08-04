@@ -37,7 +37,7 @@ function installAppInstaller{
     catch {
         Write-Warning "Error installing/updating winget using built in methods"
 
-        Write-Host "Attempting top download Winget Manually"
+        Write-Host "Attempting to download Winget Manually"
         
         Add-AppxPackage https://tinyurl.com/w1nget
              
@@ -116,8 +116,6 @@ Function removeAllOffice{
         Write-Output "configurationUninstall.xml Already Exists"
     }
 
-        #Install office
-        # Start-Process -FilePath "C:\PS\Office64bit.exe" -Wait
         Write-Output "Uninstalling All Office Products"
         try{
             C:\PS\setup.exe /configure C:\PS\configurationUninstall.xml
@@ -155,7 +153,7 @@ Function installOffice32{
     try{
         C:\PS\setup.exe /configure C:\PS\configuration32Bit.xml
     }Catch{
-        "Sorry there was an error"
+        "Sorry there was an error installing Office 365"
     }
     Write-Output "Office 365 Apps For Business Installed"
 
@@ -190,7 +188,7 @@ Function installOffice64{
     try{
         C:\PS\setup.exe /configure C:\PS\configuration.xml
     }Catch{
-        "Sorry there was an error"
+        "Sorry there was an error installing Office 365"
     }
     Write-Output "Office 365 Apps For Business Installed"
 
@@ -382,22 +380,6 @@ function welcomelogo {
 
 welcomelogo
 
-function listFunctions{
-    Write-Host"
-    ------------------------------------------
-    | All Functions Available in this Script |
-    ------------------------------------------ 
-    | testAppInstaller                       |
-    | installAppInstaller                    | 
-    | installOffice                          | 
-    | installPrograms                        | 
-    | setPower                               | 
-    | welcomelogo                            | 
-    | scriptMenu                             | 
-    ------------------------------------------
-    "
-}#End listFunctions
-
 function scriptMenu{
     
     Write-Host "Welcome to the Setup Script please follow all instructions`n"
@@ -460,7 +442,7 @@ function scriptMenu{
 }#End sciptMenu
 
 
-#Commands to Run Script
+#Commands that run at the start of the script Script
 clear-host
 welcomelogo
 scriptMenu
