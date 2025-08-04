@@ -31,8 +31,7 @@ function installAppInstaller{
 
     try {
         #Install/update winget using built in methods
-        #Winget Upgrade Microsoft.AppInstaller
-        throw "Test Error"
+        Winget Upgrade Microsoft.AppInstaller
         Winget -v
         exit
     }
@@ -475,3 +474,4 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
