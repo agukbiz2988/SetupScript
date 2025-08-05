@@ -333,7 +333,10 @@ function otherPrograms{
         [6] 7zip
         [7] Dropbox
 	[8] Splashtop SOS
- 	[9] Splashtop Streamer
+    	[9] Splashtop Streamer
+        [10] PowerToys (Preview)
+        [11] WindHawk
+
         [E] Exit Other Programs  
         "
         
@@ -348,6 +351,8 @@ function otherPrograms{
             7 { winget install Dropbox.Dropbox --accept-source-agreements -h --force                        }
 	    8 { downloadSOS										    }
      	    9 { winget install Splashtop.SplashtopStreamer -h --force                                       }
+            10 { winget install Microsoft.PowerToys -h --force                                              }
+            11 { winget RamenSoftware.Windhawk -h --force                                                   }
             E { 
                 #Stop the While Loop
                 $otherProgramsLoop = $false
