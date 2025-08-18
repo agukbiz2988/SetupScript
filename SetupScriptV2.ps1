@@ -38,7 +38,11 @@ function installAppInstaller{
 
         Write-Host "Attempting to download Winget Manually"
         
-        Add-AppxPackage https://tinyurl.com/w1nget
+        #Add-AppxPackage https://tinyurl.com/w1nget
+        createFolderPath
+        
+        Invoke-WebRequest -Uri "https://tinyurl.com/w1nget" -OutFile "C:\PS\wingetinstaller.msixbundle"
+        start-process "C:\PS\wingetinstaller.msixbundle"
              
     }
 }#End of installAppInstaller
@@ -414,7 +418,7 @@ function scriptMenu{
             4 { installPrograms     }
             5 { otherPrograms       }
 	        6 { downloadSOS 	    }
-            7 {removeAllOffice      }
+            7 { removeAllOffice     }
             * {
    		        downloadSOS
                 installAppInstaller
