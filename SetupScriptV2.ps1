@@ -31,18 +31,18 @@ function installAppInstaller{
     try {
         #Install/update winget using built in methods
         Winget Upgrade Microsoft.AppInstaller
-        Winget -v
+        #Winget -v
     }
     catch {
         Write-Warning "Error installing/updating winget using built in methods"
 
         Write-Host "Attempting to download Winget Manually"
         
-        #Add-AppxPackage https://tinyurl.com/w1nget
-        createFolderPath
-        
-        Invoke-WebRequest -Uri "https://tinyurl.com/w1nget" -OutFile "C:\PS\wingetinstaller.msixbundle"
-        start-process "C:\PS\wingetinstaller.msixbundle"
+    Add-AppxPackage https://tinyurl.com/w1nget
+    # createFolderPath
+    
+    # Invoke-WebRequest -Uri "https://tinyurl.com/w1nget" -OutFile "C:\PS\wingetinstaller.msixbundle"
+    # start-process "C:\PS\wingetinstaller.msixbundle"
              
     }
 }#End of installAppInstaller
