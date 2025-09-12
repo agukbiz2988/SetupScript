@@ -228,7 +228,7 @@ function installPrograms{
     $list = @( "google.chrome", "Adobe.Acrobat.Reader.64-bit")
             
     for($i = 0; $i -le $list.length -1 ; $i++){
-             winget install $list[$i] --accept-source-agreements -h
+             winget install $list[$i] -h
         } 
     
     installOffice64   
@@ -453,5 +453,6 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
