@@ -30,15 +30,16 @@ function installAppInstaller{
 
     try {
         #Install/update winget using built in methods
-        Winget Upgrade Microsoft.AppInstaller
+        #Winget Upgrade Microsoft.AppInstaller
+		
+		Invoke-WebRequest -Uri "https://aka.ms/getwinget" -OutFile "$env:TEMP\AppInstaller.msixbundle"
+		Add-AppxPackage "$env:TEMP\AppInstaller.msixbundle"
+
         #Winget -v
     }
     catch {
-        Write-Warning "Error installing/updating winget using built in methods"
-
-        Write-Host "Attempting to download Winget Manually"
-        
-    Add-AppxPackage https://tinyurl.com/w1nget
+        Write-Warning "Error installing/updating winget using built in methods"		
+    #Add-AppxPackage https://tinyurl.com/w1nget
     # createFolderPath
     
     # Invoke-WebRequest -Uri "https://tinyurl.com/w1nget" -OutFile "C:\PS\wingetinstaller.msixbundle"
@@ -453,6 +454,7 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
 
