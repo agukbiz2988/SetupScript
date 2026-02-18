@@ -286,7 +286,7 @@ function Start-WindowsUpdate {
     Write-Host "Checking for Windows Updates..." -ForegroundColor Yellow
     Install-Module PSWindowsUpdate -Force
     Import-Module PSWindowsUpdate
-    Get-WindowsUpdate -AcceptAll -Install -MicrosoftUpdate -IncludeOptional -IgnoreReboot
+    Get-WindowsUpdate -AcceptAll -Install -MicrosoftUpdate -IgnoreReboot
 }
 
 
@@ -910,4 +910,5 @@ while ($menuLoop) {
         "0"  { $menuLoop = $false; Write-Host "`nExiting script." -ForegroundColor Yellow }
         default { Write-Host "Invalid selection. Please try again." -ForegroundColor Red }
     }
+
 }
