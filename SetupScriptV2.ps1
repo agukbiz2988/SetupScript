@@ -574,9 +574,9 @@ function scriptMenu{
         [3] Uninstall All Unnessesary Programs
         [4] Install All Standard Programs
         [5] Other Programs
-[6] Install Splashtop
+	[6] Install Splashtop
         [7] Microsoft Office Removal
-[8] Set Recommended Password Policy
+	[8] Set Recommended Password Policy
         [*] Run all Above Options
         [E] End Script
 	[W] Uninstall Wolf Security
@@ -627,6 +627,7 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
 
