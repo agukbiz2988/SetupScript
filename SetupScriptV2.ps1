@@ -507,11 +507,6 @@ function Set-RecommendedPasswordPolicy{
     Set-PasswordPolicy -policy 2 -num 0
     Start-Sleep 1
 
-    #Change Maximum Password Age
-    Write-Host "Changing Maximum Password Age to Recommended Setting" -ForegroundColor green
-    Set-PasswordPolicy -policy 3 -num 182
-    Start-Sleep 1
-
     #Change Password History Size
     Write-Host "Changing Password History Size to Recommended Setting" -ForegroundColor green
     Set-PasswordPolicy -policy 4 -num 24
@@ -627,6 +622,7 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
 
