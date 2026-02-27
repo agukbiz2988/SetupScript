@@ -366,6 +366,176 @@ function otherPrograms{
     }
 }
 
+function Set-PasswordPolicy{
+    param(
+        [Int]$policy,
+        [Int]$num
+    )
+
+    switch($policy){
+        1{ Net Accounts /MINPWLEN:$num         }
+        2{ Net Accounts /MINPWAGE:$num         }
+        3{ Net Accounts /MAXPWAGE:$num         }
+        4{ Net Accounts /UNIQUEPW:$num         }
+        5{ Net accounts /lockoutthreshold:$num }
+        6{ Net Accounts /lockoutduration:$num  }
+        7{ Net Accounts /lockoutwindow:$num    }
+    }
+}
+
+function Set-PasswordComplexity{
+    param(
+        [Int] $num
+    )
+
+    secedit.exe /export /cfg C:\secconfig.cfg
+    Start-Sleep 1
+
+    switch($num){
+        0{
+            #Disable Complexity
+            (Get-Content -path C:\secconfig.cfg -Raw) -replace 'PasswordComplexity = 1', 'PasswordComplexity = 0' | Out-File -FilePath C:\secconfig.cfg
+            Start-Sleep 1
+        }
+        1{
+            #Enable Complexity
+            (Get-Content -path C:\secconfig.cfg -Raw) -replace 'PasswordComplexity = 0', 'PasswordComplexity = 1' | Out-File -FilePath C:\secconfig.cfg
+            Start-Sleep 1
+        }
+        default{Write-Host $incorrectNum}
+    }
+    secedit.exe /configure /db $env:windir\securitynew.sdb /cfg C:\secconfig.cfg /areas SECURITYPOLICY
+}
+
+function Set-AdministratorLockout{
+    param(
+        [Int] $num
+    )
+
+    secedit.exe /export /cfg C:\secconfig.cfg
+    Start-Sleep 1
+
+    switch($num){
+        0{
+            #Disable Admin Lockout
+            (Get-Content -path C:\secconfig.cfg -Raw) -replace 'AllowAdministratorLockout = 1', 'AllowAdministratorLockout = 0' | Out-File -FilePath C:\secconfig.cfg
+            Start-Sleep 1
+        }
+        1{
+            #Enable Admin Lockout
+            (Get-Content -path C:\secconfig.cfg -Raw) -replace 'AllowAdministratorLockout = 0', 'AllowAdministratorLockout = 1' | Out-File -FilePath C:\secconfig.cfg
+            Start-Sleep 1
+        }
+        default{Write-Host $incorrectNum}
+    }
+    secedit.exe /configure /db $env:windir\securitynew.sdb /cfg C:\secconfig.cfg /areas SECURITYPOLICY
+}
+
+function Set-DefaultPasswordPolicy{
+
+    #Enable/Disable Password Complexity
+    Write-Host "Turning Complexity Off " -ForegroundColor green
+    Set-PasswordComplexity 0
+    Write-Host "Complextity Turned off`n" -ForegroundColor green
+    Start-Sleep 1
+
+    #Enable/Disable Administrator Account Lockout
+    Write-Host "Disabling Admin Lockout" -ForegroundColor green
+    Set-AdministratorLockout 0
+    Write-Host "Completed Disabling Admin Lockout`n" -ForegroundColor green
+    Start-Sleep 1
+
+    #Change Minimum Password Length
+    Write-Host "Changing Minimum Password Length Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 1 -num 0
+    Start-Sleep 1
+
+    #Change Minimum Password Age
+    Write-Host "Changing Minimum Password Age Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 2 -num 0
+    Start-Sleep 1
+
+    #Change Maximum Password Age
+    Write-Host "Changing Maximum Password Age Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 3 -num 42
+    Start-Sleep 1
+
+    #Change Password History Size
+    Write-Host "Changing Password History Size Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 4 -num 0
+    Start-Sleep 1
+
+    #Change Lockout Threshold
+    Write-Host "Changing Lockout Threshold Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 5 -num 10
+    Start-Sleep 1
+
+    #Change Lockout Duration Time
+    Write-Host "Changing Lockout Duration Time Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 7 -num 10
+    Start-Sleep 1
+
+    #Change Lockout Window Time
+    Write-Host "Changing Lockout Window Time Back to Default" -ForegroundColor green
+    Set-PasswordPolicy -policy 6 -num 10
+    Start-Sleep 1
+
+    net accounts
+}
+
+function Set-RecommendedPasswordPolicy{
+
+    #Enable/Disable Password Complexity
+    Write-Host "Turning Complexity On " -ForegroundColor green
+    Set-PasswordComplexity 1
+    Write-Host "Complextity Turned On`n" -ForegroundColor green
+    Start-Sleep 1
+
+    #Enable/Disable Administrator Account Lockout
+    Write-Host "Enabling Admin Lockout" -ForegroundColor green
+    Set-AdministratorLockout 1
+    Write-Host "Completed Enabling Admin Lockout`n" -ForegroundColor green
+    Start-Sleep 1
+
+    #Change Minimum Password Length
+    Write-Host "Changing Minimum Password Length to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 1 -num 12
+    Start-Sleep 1
+
+    #Change Minimum Password Age
+    Write-Host "Changing Minimum Password Age to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 2 -num 0
+    Start-Sleep 1
+
+    #Change Maximum Password Age
+    Write-Host "Changing Maximum Password Age to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 3 -num 182
+    Start-Sleep 1
+
+    #Change Password History Size
+    Write-Host "Changing Password History Size to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 4 -num 24
+    Start-Sleep 1
+
+    #Change Lockout Threshold
+    Write-Host "Changing Lockout Threshold to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 5 -num 10
+    Start-Sleep 1
+
+    #Change Lockout Window Time
+    Write-Host "Changing Lockout Window Time to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 6 -num 30
+    Start-Sleep 1
+
+    #Change Lockout Duration Time
+    Write-Host "Changing Lockout Duration Time to Recommended Setting" -ForegroundColor green
+    Set-PasswordPolicy -policy 7 -num 30
+    Start-Sleep 1
+
+    net accounts
+}
+
+
 function welcomelogo {
     
     Write-Host "
@@ -404,8 +574,9 @@ function scriptMenu{
         [3] Uninstall All Unnessesary Programs
         [4] Install All Standard Programs
         [5] Other Programs
-	[6] Install Splashtop
+		[6] Install Splashtop
         [7] Microsoft Office Removal
+		[8] Set Recommended Password Policy
         [*] Run all Above Options
         [E] End Script
 	[W] Uninstall Wolf Security
@@ -420,11 +591,13 @@ function scriptMenu{
             5 { otherPrograms       }
 	        6 { downloadSOS 	    }
             7 { removeAllOffice     }
+			8 { Set-RecommendedPasswordPolicy }
             * {
    		        downloadSOS
                 installAppInstaller
 		        winget list Microsoft.AppInstaller
                 setPower
+				Set-RecommendedPasswordPolicy
                 uninstallPrograms
                 installPrograms
             }
@@ -454,6 +627,7 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
 
