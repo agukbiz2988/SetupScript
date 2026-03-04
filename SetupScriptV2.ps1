@@ -504,7 +504,7 @@ function Set-RecommendedPasswordPolicy{
 
     #Change Minimum Password Age
     Write-Host "Changing Minimum Password Age to Recommended Setting" -ForegroundColor green
-    Set-PasswordPolicy -policy 2 -num 0
+    Net Accounts /UNIQUEPW:UNLIMITED
     Start-Sleep 1
 
     #Change Password History Size
@@ -622,6 +622,7 @@ clear-host
 welcomelogo
 scriptMenu
 [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
 
 
 
